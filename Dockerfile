@@ -1,6 +1,6 @@
 # Had to remove "as builder" due to EBS errors
-# FROM node:alpine as builder
-FROM node:alpine
+FROM node:alpine as builder
+# FROM node:alpine
 
 USER node
 RUN mkdir -p /home/node/app
@@ -13,5 +13,5 @@ RUN npm run build
 FROM nginx:alpine
 EXPOSE 80
 # change "--from=builder" to "--from=0"
-# COPY --from=builder /home/node/app/build /usr/share/nginx/html
-COPY --from=0 /home/node/app/build /usr/share/nginx/html
+COPY --from=builder /home/node/app/build /usr/share/nginx/html
+#COPY --from=0 /home/node/app/build /usr/share/nginx/html
